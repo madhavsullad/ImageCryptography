@@ -40,17 +40,17 @@ namespace ImageCryptography
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            disable_all();
+            Disable_all();
             groupBox6.Hide();
-            button4.Enabled = false;
-            button5.Enabled = false;
-            button11.Enabled = false;
-            txt_strDec.Enabled = false;
-            button10.Enabled = false;
+            storeEnc_btn.Enabled = false;
+            encryptImage_btn.Enabled = false;
+            send_btn.Enabled = false;
+            saveImage_txt.Enabled = false;
+            selectEncImage_btn.Enabled = false;
         }
 
         // Function to encrypt the image
-        public string encrypt(string imageToEncrypt)
+        public string Encrypt(string imageToEncrypt)
         {
             MessageBox.Show("RSA_E = " + RSA_E + "\nn = " + n);
             string hex = imageToEncrypt;
@@ -70,7 +70,7 @@ namespace ImageCryptography
         }
 
         // Function to decrypt the image
-        public string decrypt(String  imageToDecrypt)
+        public string Decrypt(String  imageToDecrypt)
         {
                 char[] ar = imageToDecrypt.ToCharArray();
                 int i = 0, j = 0;
@@ -100,42 +100,42 @@ namespace ImageCryptography
         }
 
         // Send public Key button Click event
-        private void button3_Click(object sender, EventArgs e)
+        private void SendPublicKey(object sender, EventArgs e)
         {
             string ip = GetIP();
-            button10.Enabled = true;
+            selectEncImage_btn.Enabled = true;
 
-            if (btn_sendKey.Text== "Send Public Key")
+            if (sendPublicKey_btn.Text== "Send Public Key")
             {
-                if (textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "")
+                if (primeNumber1_txt.Text == "" || primeNumber2_txt.Text == "" || numberE_txt.Text == "")
                 {
                     MessageBox.Show("Enter Valid Details For RSA", "ERROR");
                 }
 
                 else
                 {
-                    if (ImageCrypto.library.IsPrime(Convert.ToInt16(textBox2.Text)))
+                    if (ImageCrypto.library.IsPrime(Convert.ToInt16(primeNumber1_txt.Text)))
                     {
-                        RSA_P = Convert.ToInt16(textBox2.Text);
+                        RSA_P = Convert.ToInt16(primeNumber1_txt.Text);
                     }
                     else
                     {
-                        textBox2.Text = "";
+                        primeNumber1_txt.Text = "";
                         MessageBox.Show("Enter Prime Number");
                         return;
                     }
-                    if (ImageCrypto.library.IsPrime(Convert.ToInt16(textBox3.Text)))
+                    if (ImageCrypto.library.IsPrime(Convert.ToInt16(primeNumber2_txt.Text)))
                     {
-                        RSA_Q = Convert.ToInt16(textBox3.Text);
+                        RSA_Q = Convert.ToInt16(primeNumber2_txt.Text);
                     }
                     else
                     {
-                        textBox3.Text = "";
+                        primeNumber2_txt.Text = "";
                         MessageBox.Show("Enter Prime Number");
                         return;
                     }
 
-                    RSA_E = Convert.ToInt16(textBox4.Text);
+                    RSA_E = Convert.ToInt16(numberE_txt.Text);
 
                     //  Calculating Private Key
                     n = ImageCrypto.RSAalgorithm.n_value(RSA_P, RSA_Q);
@@ -143,13 +143,13 @@ namespace ImageCryptography
                     d = ImageCrypto.RSAalgorithm.cal_privateKey(phi, RSA_E, n);
                     MessageBox.Show("Please Connect to the server IP : " + ip + "\nPublic Key = (" + RSA_E + " ," + n + ")\nPrivate Key = (" + d + "," + n + ")", "Alert");
 
-                    textBox2.Enabled = false;
-                    textBox3.Enabled = false;
-                    textBox4.Enabled = false;
-                    button4.Enabled = true;
-                    button7.Enabled = true;
-                    txt_strDec.Enabled = true;
-                    btn_sendKey.Text = "Receive";
+                    primeNumber1_txt.Enabled = false;
+                    primeNumber2_txt.Enabled = false;
+                    numberE_txt.Enabled = false;
+                    storeEnc_btn.Enabled = true;
+                    saveImage_btn.Enabled = true;
+                    saveImage_txt.Enabled = true;
+                    sendPublicKey_btn.Text = "Receive";
 
 
                     // Sending Public key
@@ -210,40 +210,41 @@ namespace ImageCryptography
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        // Encrypt image button
+        private void EncryptImage(object sender, EventArgs e)
         {
             try
             {
-                button1.Enabled = false;
-                disable_all();
-                String en = encrypt(loadImage);
-                File.WriteAllText(textBox5.Text, en);
+                selectImage_btn.Enabled = false;
+                Disable_all();
+                String en = Encrypt(loadImage);
+                File.WriteAllText("enc.txt", en);
                 MessageBox.Show("Encryption Done");
-                button1.Enabled = true;
-                button11.Enabled = true;
-                enable_all();
+                selectImage_btn.Enabled = true;
+                send_btn.Enabled = true;
+                Enable_all();
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message,"Error while encrypting image");
             }
         }
 
         // Decrypt Image button Click event
-        private void button6_Click(object sender, EventArgs e)
+        private void DecryptImage(object sender, EventArgs e)
         {
-            disable_all();
+            Disable_all();
             try
             {
-                String de = decrypt(loadcipher);
+                String de = Decrypt(loadcipher);
                 pictureBox1.Image = ImageCrypto.library.ConvertByteToImage(ImageCrypto.library.DecodeHex(de));
-                FileInfo fi = new FileInfo(txt_strDec.Text);
+                FileInfo fi = new FileInfo(saveImage_txt.Text);
 
                 label9.Text = "File Name: " + fi.Name;
                 label10.Text = "Image Resolution: " + pictureBox1.Image.PhysicalDimension.Height + " X " + pictureBox1.Image.PhysicalDimension.Width;
 
 
-                pictureBox1.Image.Save(txt_strDec.Text, System.Drawing.Imaging.ImageFormat.Jpeg);
+                pictureBox1.Image.Save(saveImage_txt.Text, System.Drawing.Imaging.ImageFormat.Jpeg);
                 double imageMB = (fi.Length / 1024f) / 1024f;
                 label11.Text = "Image Size: " + imageMB.ToString(".##") + "MB";
                 MessageBox.Show("Image decrypted and Saved");
@@ -257,42 +258,42 @@ namespace ImageCryptography
         }
 
         // Load Image button event
-        private void button2_Click(object sender, EventArgs e)
+        private void LoadImage(object sender, EventArgs e)
         {
             loadImage =  BitConverter.ToString(ImageCrypto.library.ConvertImageToByte(pictureBox1.Image));
             MessageBox.Show("Image Load Successfully");
             groupBox4.Enabled = true;
-            button4.Enabled = true;
-            button5.Enabled = true;
+            storeEnc_btn.Enabled = true;
+            encryptImage_btn.Enabled = true;
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void StoreEnc(object sender, EventArgs e)
         {
             SaveFileDialog save1 = new SaveFileDialog();
             save1.Filter = "TEXT|*.txt";
             if (save1.ShowDialog() == DialogResult.OK)
             {
-                textBox5.Text = save1.FileName;
-                button5.Enabled = true;
+                storeEnc_txt.Text = save1.FileName;
+                encryptImage_btn.Enabled = true;
             }
             else
             {
-                textBox5.Text = "";
-                button5.Enabled = false;
+                storeEnc_txt.Text = "";
+                encryptImage_btn.Enabled = false;
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SelectImage(object sender, EventArgs e)
         {
             OpenFileDialog open1 = new OpenFileDialog();
             open1.Filter = "JPG|*.JPG";
             if (open1.ShowDialog() == DialogResult.OK)
             {
-                textBox1.Text = open1.FileName;
-                pictureBox1.Image = Image.FromFile(textBox1.Text);
-                button2.Enabled = true;
-                FileInfo fi = new FileInfo(textBox1.Text);
+                selectImage_txt.Text = open1.FileName;
+                pictureBox1.Image = Image.FromFile(selectImage_txt.Text);
+                loadImage_btn.Enabled = true;
+                FileInfo fi = new FileInfo(selectImage_txt.Text);
 
                 label9.Text = "File Name: " + fi.Name;
                 label10.Text = "Image Resolution: " + pictureBox1.Image.PhysicalDimension.Height + " X " + pictureBox1.Image.PhysicalDimension.Width;
@@ -303,85 +304,85 @@ namespace ImageCryptography
             }
             else
             {
-                textBox1.Text = "";
+                selectImage_txt.Text = "";
                 label9.Text = "File Name: ";
                 label10.Text = "Image Resolution: ";
                 label11.Text = "Image Size: ";
 
                 pictureBox1.Image = Properties.Resources.blank;
-                button2.Enabled = false;
+                loadImage_btn.Enabled = false;
                 
             }
         }
 
-        private void disable_all()
+        private void Disable_all()
         {            
-            button2.Enabled = false;
-            btn_loadDec.Enabled = false;
-            button7.Enabled = false;
-            btn_decrypt.Enabled = false;
+            loadImage_btn.Enabled = false;
+            loadEncImage_btn.Enabled = false;
+            saveImage_btn.Enabled = false;
+            decryptImage_btn.Enabled = false;
         }
 
-        private void enable_all()
+        private void Enable_all()
         {
-            button1.Enabled = true;
-            button2.Enabled = true;
+            selectImage_btn.Enabled = true;
+            loadImage_btn.Enabled = true;
             groupBox4.Enabled = true;
-            button4.Enabled = true;
-            button5.Enabled = true;
-            button11.Enabled = true;
+            storeEnc_btn.Enabled = true;
+            encryptImage_btn.Enabled = true;
+            send_btn.Enabled = true;
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void SelectEncImage(object sender, EventArgs e)
         {
             OpenFileDialog open1 = new OpenFileDialog();
             open1.Filter = "TEXT|*.txt";
             if (open1.ShowDialog() == DialogResult.OK)
             {
-                textBox7.Text = open1.FileName;
-                textBox1.Text = open1.FileName;
-                btn_loadDec.Enabled = true;
+                selectEncImage_txt.Text = open1.FileName;
+                selectImage_txt.Text = open1.FileName;
+                loadEncImage_btn.Enabled = true;
             }
             else
             {
-                textBox7.Text = "";
-                btn_loadDec.Enabled = false;
+                selectEncImage_txt.Text = "";
+                loadEncImage_btn.Enabled = false;
             }
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void LoadEncimage(object sender, EventArgs e)
         {   
-            loadcipher = File.ReadAllText(textBox1.Text);
+            loadcipher = File.ReadAllText(selectImage_txt.Text);
             MessageBox.Show("Load Cipher Successfully");
             groupBox5.Enabled = true;
             groupBox4.Enabled = true;
-            button7.Enabled = true;
+            saveImage_btn.Enabled = true;
 
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void SaveImage(object sender, EventArgs e)
         {
             SaveFileDialog save1 = new SaveFileDialog();
             save1.Filter = "JPG|*.JPG";
             if (save1.ShowDialog() == DialogResult.OK)
             {
-                txt_strDec.Text = save1.FileName;
-                btn_decrypt.Enabled = true;
+                saveImage_txt.Text = save1.FileName;
+                decryptImage_btn.Enabled = true;
             }
             else
             {
-                txt_strDec.Text = "";
-                btn_decrypt.Enabled = false;
+                saveImage_txt.Text = "";
+                decryptImage_btn.Enabled = false;
             }
         }
 
         // Send Encrypted image button event
-        private void button11_Click(object sender, EventArgs e)
+        private void Send(object sender, EventArgs e)
         {
             try
             {
-                string ip = textBox6.Text;
-                string fn = System.IO.Path.GetFullPath(textBox5.Text);
+                string ip = getPublicIP_txt.Text;
+                string fn = System.IO.Path.GetFullPath(storeEnc_txt.Text);
 
                 //call client.py
                 string cmdText = "python client.py " + ip + " enc.txt";
@@ -408,14 +409,10 @@ namespace ImageCryptography
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         // Receive encrypted image button event
-        private void button12_Click(object sender, EventArgs e)
+        private void Button12_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("button12 Has been clicked!!", "Important alert!!");
             string ip = GetIP();
 
             try {
@@ -444,11 +441,11 @@ namespace ImageCryptography
         }
 
         // Get Public Key event
-        private void button6_Click_1(object sender, EventArgs e)
+        private void GetPublicKey(object sender, EventArgs e)
         {
             try
             {
-                string ip = textBox6.Text;
+                string ip = getPublicIP_txt.Text;
                 string cmdText = "python recTest.py " +  ip ;
                 label12.Text = "Recceiver's IP = " + ip ;
 
@@ -482,22 +479,22 @@ namespace ImageCryptography
             }
         }
 
-        private void textBox6_MouseClick(object sender, MouseEventArgs e)
+        private void GetPublicIP(object sender, MouseEventArgs e)
         {
-            textBox6.Text = "";
+            getPublicIP_txt.Text = "";
         }
 
-        private void creditToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CreditToolStripMenuItem_Click(object sender, EventArgs e)
         {
             groupBox6.Show();
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void button3_Click_1(object sender, EventArgs e)
+        private void CreditDone(object sender, EventArgs e)
         {
             groupBox6.Hide();
         }
