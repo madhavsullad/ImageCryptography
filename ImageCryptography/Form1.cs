@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Net.Sockets;
 using System.Net;
 using System.IO;
-using System.Linq;
 
 namespace ImageCryptography
 {
@@ -100,6 +99,7 @@ namespace ImageCryptography
             return dc;
         }
 
+        // Send public Key button Click event
         private void button3_Click(object sender, EventArgs e)
         {
             string ip = GetIP();
@@ -174,13 +174,14 @@ namespace ImageCryptography
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message, "Error while sending public key!");
                     }
 
                 }
             }
             else
             {
+                // Receiving Public Key
                 try
                 {
                     MessageBox.Show("Server IP = " + ip.ToString());
@@ -203,7 +204,7 @@ namespace ImageCryptography
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message,"Error while receiving public key!");
                 }
             }
 
@@ -228,6 +229,7 @@ namespace ImageCryptography
             }
         }
 
+        // Decrypt Image button Click event
         private void button6_Click(object sender, EventArgs e)
         {
             disable_all();
@@ -254,6 +256,7 @@ namespace ImageCryptography
             }
         }
 
+        // Load Image button event
         private void button2_Click(object sender, EventArgs e)
         {
             loadImage =  BitConverter.ToString(ImageCrypto.library.ConvertImageToByte(pictureBox1.Image));
@@ -372,16 +375,17 @@ namespace ImageCryptography
             }
         }
 
+        // Send Encrypted image button event
         private void button11_Click(object sender, EventArgs e)
         {
             try
             {
                 string ip = textBox6.Text;
-                string fn = System.IO.Path.GetFileName(textBox5.Text);
-                
+                string fn = System.IO.Path.GetFullPath(textBox5.Text);
 
                 //call client.py
-                string cmdText = "python client.py " + ip + " " + fn;
+                string cmdText = "python client.py " + ip + " enc.txt";
+                MessageBox.Show(fn, "Sending file name");
 
                 Console.WriteLine(cmdText);
 
@@ -409,28 +413,37 @@ namespace ImageCryptography
 
         }
 
+        // Receive encrypted image button event
         private void button12_Click(object sender, EventArgs e)
         {
             string ip = GetIP();
 
-            MessageBox.Show("Server IP = " + ip.ToString());
-            string cmdText = "python clirec.py " + ip;
-            Console.WriteLine(cmdText);
+            try {
+                MessageBox.Show("Server IP = " + ip.ToString());
+                string cmdText = "python server.py " + ip;
+                Console.WriteLine(cmdText);
 
-            Process process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.RedirectStandardInput = true;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.UseShellExecute = false;
-            process.Start();
-            process.StandardInput.WriteLine(cmdText);
-            process.StandardInput.Flush();
-            process.StandardInput.Close();
-            process.WaitForExit();
-            Console.WriteLine(process.StandardOutput.ReadToEnd());
+                Process process = new Process();
+                process.StartInfo.FileName = "cmd.exe";
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.RedirectStandardInput = true;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.UseShellExecute = false;
+                process.Start();
+                process.StandardInput.WriteLine(cmdText);
+                process.StandardInput.Flush();
+                process.StandardInput.Close();
+                process.WaitForExit();
+                Console.WriteLine(process.StandardOutput.ReadToEnd());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error occurred while Receiving encypted image");
+            }
+
         }
 
+        // Get Public Key event
         private void button6_Click_1(object sender, EventArgs e)
         {
             try
