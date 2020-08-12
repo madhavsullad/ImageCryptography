@@ -38,7 +38,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.creditDone_btn = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.credits_rtxt = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,16 +46,13 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.receiveImage_tab = new System.Windows.Forms.TabPage();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.label6 = new System.Windows.Forms.Label();
             this.decryptImage_btn = new System.Windows.Forms.Button();
             this.saveImage_btn = new System.Windows.Forms.Button();
-            this.selectEncImage_btn = new System.Windows.Forms.Button();
             this.saveImage_txt = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.selectEncImage_txt = new System.Windows.Forms.TextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.receiveRSA_group = new System.Windows.Forms.GroupBox();
             this.sendPublicKey_btn = new System.Windows.Forms.Button();
             this.numberE_txt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -63,23 +60,19 @@
             this.primeNumber1_txt = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.loadEncImage_btn = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.sendImage_tab = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.send_btn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.selectImage_btn = new System.Windows.Forms.Button();
             this.selectImage_txt = new System.Windows.Forms.TextBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.sendRSA_group = new System.Windows.Forms.GroupBox();
             this.getPublicIP_txt = new System.Windows.Forms.TextBox();
             this.getPublicKey_btn = new System.Windows.Forms.Button();
             this.lbl_pubKey = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.encryptImage_btn = new System.Windows.Forms.Button();
-            this.storeEnc_btn = new System.Windows.Forms.Button();
-            this.storeEnc_txt = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.loadImage_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -92,11 +85,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.receiveImage_tab.SuspendLayout();
+            this.receiveRSA_group.SuspendLayout();
+            this.sendImage_tab.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
+            this.sendRSA_group.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -182,7 +175,7 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.creditDone_btn);
-            this.groupBox6.Controls.Add(this.richTextBox1);
+            this.groupBox6.Controls.Add(this.credits_rtxt);
             this.groupBox6.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox6.Location = new System.Drawing.Point(0, 9);
             this.groupBox6.Name = "groupBox6";
@@ -201,15 +194,15 @@
             this.creditDone_btn.UseVisualStyleBackColor = true;
             this.creditDone_btn.Click += new System.EventHandler(this.CreditDone);
             // 
-            // richTextBox1
+            // credits_rtxt
             // 
-            this.richTextBox1.Enabled = false;
-            this.richTextBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(8, 26);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(341, 230);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "Developed By:\n    Kishore Prabhakar\n    Likith B.\n    Madhav M Sullad\n    Neeraj " +
+            this.credits_rtxt.Enabled = false;
+            this.credits_rtxt.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.credits_rtxt.Location = new System.Drawing.Point(8, 26);
+            this.credits_rtxt.Name = "credits_rtxt";
+            this.credits_rtxt.Size = new System.Drawing.Size(341, 230);
+            this.credits_rtxt.TabIndex = 0;
+            this.credits_rtxt.Text = "Developed By:\n    Kishore Prabhakar\n    Likith B.\n    Madhav M Sullad\n    Neeraj " +
     "B.M.";
             // 
             // pictureBox1
@@ -266,8 +259,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.receiveImage_tab);
+            this.tabControl1.Controls.Add(this.sendImage_tab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -276,25 +269,21 @@
             this.tabControl1.Size = new System.Drawing.Size(274, 586);
             this.tabControl1.TabIndex = 0;
             // 
-            // tabPage2
+            // receiveImage_tab
             // 
-            this.tabPage2.Controls.Add(this.progressBar2);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.decryptImage_btn);
-            this.tabPage2.Controls.Add(this.saveImage_btn);
-            this.tabPage2.Controls.Add(this.selectEncImage_btn);
-            this.tabPage2.Controls.Add(this.saveImage_txt);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.selectEncImage_txt);
-            this.tabPage2.Controls.Add(this.groupBox4);
-            this.tabPage2.Controls.Add(this.loadEncImage_btn);
-            this.tabPage2.Location = new System.Drawing.Point(4, 28);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(266, 554);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Receive Image";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.receiveImage_tab.Controls.Add(this.progressBar2);
+            this.receiveImage_tab.Controls.Add(this.decryptImage_btn);
+            this.receiveImage_tab.Controls.Add(this.saveImage_btn);
+            this.receiveImage_tab.Controls.Add(this.saveImage_txt);
+            this.receiveImage_tab.Controls.Add(this.label5);
+            this.receiveImage_tab.Controls.Add(this.receiveRSA_group);
+            this.receiveImage_tab.Location = new System.Drawing.Point(4, 28);
+            this.receiveImage_tab.Name = "receiveImage_tab";
+            this.receiveImage_tab.Padding = new System.Windows.Forms.Padding(3);
+            this.receiveImage_tab.Size = new System.Drawing.Size(266, 554);
+            this.receiveImage_tab.TabIndex = 1;
+            this.receiveImage_tab.Text = "Receive Image";
+            this.receiveImage_tab.UseVisualStyleBackColor = true;
             // 
             // progressBar2
             // 
@@ -302,15 +291,6 @@
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(248, 23);
             this.progressBar2.TabIndex = 18;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 271);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(115, 19);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Cipher File Path:";
             // 
             // decryptImage_btn
             // 
@@ -332,16 +312,6 @@
             this.saveImage_btn.UseVisualStyleBackColor = true;
             this.saveImage_btn.Click += new System.EventHandler(this.SaveImage);
             // 
-            // selectEncImage_btn
-            // 
-            this.selectEncImage_btn.Location = new System.Drawing.Point(220, 295);
-            this.selectEncImage_btn.Name = "selectEncImage_btn";
-            this.selectEncImage_btn.Size = new System.Drawing.Size(40, 27);
-            this.selectEncImage_btn.TabIndex = 15;
-            this.selectEncImage_btn.Text = "...";
-            this.selectEncImage_btn.UseVisualStyleBackColor = true;
-            this.selectEncImage_btn.Click += new System.EventHandler(this.SelectEncImage);
-            // 
             // saveImage_txt
             // 
             this.saveImage_txt.Enabled = false;
@@ -359,29 +329,21 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Save Image at:";
             // 
-            // selectEncImage_txt
+            // receiveRSA_group
             // 
-            this.selectEncImage_txt.Enabled = false;
-            this.selectEncImage_txt.Location = new System.Drawing.Point(9, 295);
-            this.selectEncImage_txt.Name = "selectEncImage_txt";
-            this.selectEncImage_txt.Size = new System.Drawing.Size(208, 27);
-            this.selectEncImage_txt.TabIndex = 14;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.sendPublicKey_btn);
-            this.groupBox4.Controls.Add(this.numberE_txt);
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.primeNumber2_txt);
-            this.groupBox4.Controls.Add(this.primeNumber1_txt);
-            this.groupBox4.Controls.Add(this.label2);
-            this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Location = new System.Drawing.Point(6, 6);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(254, 248);
-            this.groupBox4.TabIndex = 1;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "RSA:";
+            this.receiveRSA_group.Controls.Add(this.sendPublicKey_btn);
+            this.receiveRSA_group.Controls.Add(this.numberE_txt);
+            this.receiveRSA_group.Controls.Add(this.label3);
+            this.receiveRSA_group.Controls.Add(this.primeNumber2_txt);
+            this.receiveRSA_group.Controls.Add(this.primeNumber1_txt);
+            this.receiveRSA_group.Controls.Add(this.label2);
+            this.receiveRSA_group.Controls.Add(this.label1);
+            this.receiveRSA_group.Location = new System.Drawing.Point(6, 6);
+            this.receiveRSA_group.Name = "receiveRSA_group";
+            this.receiveRSA_group.Size = new System.Drawing.Size(254, 248);
+            this.receiveRSA_group.TabIndex = 1;
+            this.receiveRSA_group.TabStop = false;
+            this.receiveRSA_group.Text = "RSA:";
             // 
             // sendPublicKey_btn
             // 
@@ -441,35 +403,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Prime Number 1:";
             // 
-            // loadEncImage_btn
+            // sendImage_tab
             // 
-            this.loadEncImage_btn.Location = new System.Drawing.Point(11, 327);
-            this.loadEncImage_btn.Name = "loadEncImage_btn";
-            this.loadEncImage_btn.Size = new System.Drawing.Size(248, 40);
-            this.loadEncImage_btn.TabIndex = 7;
-            this.loadEncImage_btn.Text = "Load File to Decrypt";
-            this.loadEncImage_btn.UseVisualStyleBackColor = true;
-            this.loadEncImage_btn.Click += new System.EventHandler(this.LoadEncimage);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.label12);
-            this.tabPage1.Controls.Add(this.send_btn);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.groupBox5);
-            this.tabPage1.Controls.Add(this.progressBar1);
-            this.tabPage1.Controls.Add(this.encryptImage_btn);
-            this.tabPage1.Controls.Add(this.storeEnc_btn);
-            this.tabPage1.Controls.Add(this.storeEnc_txt);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.loadImage_btn);
-            this.tabPage1.Location = new System.Drawing.Point(4, 28);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(266, 554);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Send Image";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.sendImage_tab.Controls.Add(this.label12);
+            this.sendImage_tab.Controls.Add(this.send_btn);
+            this.sendImage_tab.Controls.Add(this.groupBox1);
+            this.sendImage_tab.Controls.Add(this.sendRSA_group);
+            this.sendImage_tab.Controls.Add(this.progressBar1);
+            this.sendImage_tab.Controls.Add(this.encryptImage_btn);
+            this.sendImage_tab.Controls.Add(this.loadImage_btn);
+            this.sendImage_tab.Location = new System.Drawing.Point(4, 28);
+            this.sendImage_tab.Name = "sendImage_tab";
+            this.sendImage_tab.Padding = new System.Windows.Forms.Padding(3);
+            this.sendImage_tab.Size = new System.Drawing.Size(266, 554);
+            this.sendImage_tab.TabIndex = 0;
+            this.sendImage_tab.Text = "Send Image";
+            this.sendImage_tab.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
@@ -514,23 +463,26 @@
             // selectImage_txt
             // 
             this.selectImage_txt.Enabled = false;
+            this.selectImage_txt.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectImage_txt.ForeColor = System.Drawing.Color.Gray;
             this.selectImage_txt.Location = new System.Drawing.Point(6, 21);
             this.selectImage_txt.Name = "selectImage_txt";
             this.selectImage_txt.Size = new System.Drawing.Size(191, 27);
             this.selectImage_txt.TabIndex = 0;
+            this.selectImage_txt.Text = "Select an image to send";
             // 
-            // groupBox5
+            // sendRSA_group
             // 
-            this.groupBox5.Controls.Add(this.getPublicIP_txt);
-            this.groupBox5.Controls.Add(this.getPublicKey_btn);
-            this.groupBox5.Controls.Add(this.lbl_pubKey);
-            this.groupBox5.Controls.Add(this.label8);
-            this.groupBox5.Location = new System.Drawing.Point(8, 12);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(248, 174);
-            this.groupBox5.TabIndex = 8;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "RSA:";
+            this.sendRSA_group.Controls.Add(this.getPublicIP_txt);
+            this.sendRSA_group.Controls.Add(this.getPublicKey_btn);
+            this.sendRSA_group.Controls.Add(this.lbl_pubKey);
+            this.sendRSA_group.Controls.Add(this.label8);
+            this.sendRSA_group.Location = new System.Drawing.Point(8, 12);
+            this.sendRSA_group.Name = "sendRSA_group";
+            this.sendRSA_group.Size = new System.Drawing.Size(248, 174);
+            this.sendRSA_group.TabIndex = 8;
+            this.sendRSA_group.TabStop = false;
+            this.sendRSA_group.Text = "RSA:";
             // 
             // getPublicIP_txt
             // 
@@ -540,7 +492,7 @@
             this.getPublicIP_txt.Name = "getPublicIP_txt";
             this.getPublicIP_txt.Size = new System.Drawing.Size(238, 27);
             this.getPublicIP_txt.TabIndex = 22;
-            this.getPublicIP_txt.Text = "Enter Server IP";
+            this.getPublicIP_txt.Text = GetIP();
             this.getPublicIP_txt.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GetPublicIP);
             // 
             // getPublicKey_btn
@@ -587,32 +539,6 @@
             this.encryptImage_btn.UseVisualStyleBackColor = true;
             this.encryptImage_btn.Click += new System.EventHandler(this.EncryptImage);
             // 
-            // storeEnc_btn
-            // 
-            this.storeEnc_btn.Location = new System.Drawing.Point(216, 331);
-            this.storeEnc_btn.Name = "storeEnc_btn";
-            this.storeEnc_btn.Size = new System.Drawing.Size(40, 27);
-            this.storeEnc_btn.TabIndex = 4;
-            this.storeEnc_btn.Text = "...";
-            this.storeEnc_btn.UseVisualStyleBackColor = true;
-            this.storeEnc_btn.Click += new System.EventHandler(this.StoreEnc);
-            // 
-            // storeEnc_txt
-            // 
-            this.storeEnc_txt.Location = new System.Drawing.Point(8, 331);
-            this.storeEnc_txt.Name = "storeEnc_txt";
-            this.storeEnc_txt.Size = new System.Drawing.Size(204, 27);
-            this.storeEnc_txt.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 307);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(158, 19);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Store Encrypted File at:";
-            // 
             // loadImage_btn
             // 
             this.loadImage_btn.Location = new System.Drawing.Point(8, 257);
@@ -652,16 +578,16 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.receiveImage_tab.ResumeLayout(false);
+            this.receiveImage_tab.PerformLayout();
+            this.receiveRSA_group.ResumeLayout(false);
+            this.receiveRSA_group.PerformLayout();
+            this.sendImage_tab.ResumeLayout(false);
+            this.sendImage_tab.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
+            this.sendRSA_group.ResumeLayout(false);
+            this.sendRSA_group.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -677,10 +603,10 @@
         private System.Windows.Forms.Button selectImage_btn;
         private System.Windows.Forms.TextBox selectImage_txt;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage sendImage_tab;
+        private System.Windows.Forms.TabPage receiveImage_tab;
         private System.Windows.Forms.Button loadImage_btn;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox receiveRSA_group;
         private System.Windows.Forms.TextBox primeNumber2_txt;
         private System.Windows.Forms.TextBox primeNumber1_txt;
         private System.Windows.Forms.Label label2;
@@ -688,26 +614,19 @@
         private System.Windows.Forms.TextBox numberE_txt;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button sendPublicKey_btn;
-        private System.Windows.Forms.Button storeEnc_btn;
-        private System.Windows.Forms.TextBox storeEnc_txt;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button encryptImage_btn;
         private System.Windows.Forms.Button decryptImage_btn;
         private System.Windows.Forms.Button saveImage_btn;
         private System.Windows.Forms.TextBox saveImage_txt;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox sendRSA_group;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button loadEncImage_btn;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button send_btn;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button selectEncImage_btn;
-        private System.Windows.Forms.TextBox selectEncImage_txt;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lbl_pubKey;
         private System.Windows.Forms.TextBox getPublicIP_txt;
@@ -718,7 +637,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem creditToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox credits_rtxt;
         private System.Windows.Forms.Button creditDone_btn;
     }
 }

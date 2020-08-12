@@ -1,8 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.IO;
 using System.Drawing;
 
@@ -10,7 +6,7 @@ using System.Drawing;
 
 namespace ImageCrypto
 {
-    class library
+    class Library
     {
 
         public static byte[] DecodeHex(string hextext)
