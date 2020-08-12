@@ -409,37 +409,6 @@ namespace ImageCryptography
             }
         }
 
-        // Receive encrypted image button event
-        private void Button12_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("button12 Has been clicked!!", "Important alert!!");
-            string ip = GetIP();
-
-            try {
-                MessageBox.Show("Server IP = " + ip.ToString());
-                string cmdText = "python server.py " + ip;
-                Console.WriteLine(cmdText);
-
-                Process process = new Process();
-                process.StartInfo.FileName = "cmd.exe";
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.RedirectStandardInput = true;
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.UseShellExecute = false;
-                process.Start();
-                process.StandardInput.WriteLine(cmdText);
-                process.StandardInput.Flush();
-                process.StandardInput.Close();
-                process.WaitForExit();
-                Console.WriteLine(process.StandardOutput.ReadToEnd());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error occurred while Receiving encypted image");
-            }
-
-        }
-
         // Get Public Key event
         private void GetPublicKey(object sender, EventArgs e)
         {
