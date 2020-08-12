@@ -357,8 +357,8 @@ namespace ImageCryptography
             {
                 string ip = getPublicIP_txt.Text;
 
-                //call client.py
-                string cmdText = "python client.py " + ip + " enc.txt";
+                //call sendImage.py
+                string cmdText = "python sendImage.py " + ip + " enc.txt";
 
                 Console.WriteLine(cmdText);
 
@@ -388,7 +388,7 @@ namespace ImageCryptography
             try
             {
                 string ip = getPublicIP_txt.Text;
-                string cmdText = "python recTest.py " +  ip ;
+                string cmdText = "python receiveKey.py " +  ip ;
                 label12.Text = "Recceiver's IP = " + ip ;
 
                 Console.WriteLine(cmdText);
